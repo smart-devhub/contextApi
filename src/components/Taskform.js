@@ -1,9 +1,9 @@
-import React,{useContext,useState} from 'react'
+import React,{useContext,useState,useEffect} from 'react'
 import { TasklistContext } from '../context/TasklistContext'
 
 const Taskform = () => {
 
-    const {addtask,clearlist}=useContext(TasklistContext)
+    const {addtask,clearlist,edititem,edittask}=useContext(TasklistContext)
 
     const [title,setTitle]=useState('')
 
@@ -13,9 +13,24 @@ const Taskform = () => {
 
     const handleSubmit=(e)=>{
         e.preventDefault();
-        addtask(title)
-        setTitle(' ')
+        if(edititem==null){
+            addtask(title)
+            setTitle("")
+
+        }else{
+            edittask(title,edititem.id)
+        }
+
+       
     }
+    useEffect(()=>{
+      if(edititem !==null){
+          setTitle(edititem.title)
+          console.log(title);
+      }else{
+          setTitle(" ")
+      }
+    },[])
     return (
         <div>
             <form  className="form" onSubmit={handleSubmit}>
@@ -23,6 +38,7 @@ const Taskform = () => {
                 onChange={handleChange}
                 required
                 placeholder="Add Task..."
+                value={title}
                 />
                 <div className="buttons">
                     <button type="submit" className="btn add-task-btn">Add Task</button>

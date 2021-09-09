@@ -6,13 +6,20 @@ function Tasklist() {
     const {tasks}=useContext(TasklistContext)
     return (
         <div>
+            {tasks.length ?(
             <ul className="list">
-                {tasks.map((task)=>{
-                    return(
-                        <Task task={task} />
-                    )
-                })}
-            </ul>
+            {tasks.map((task)=>{
+                return(
+                    <Task task={task} />
+                )
+            })}
+        </ul>):(
+            <div className="no-tasks">No Tasks</div>
+    )
+            
+        
+        }
+            
             
         </div>
     )

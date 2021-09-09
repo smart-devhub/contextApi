@@ -3,7 +3,7 @@ import { TasklistContext } from '../context/TasklistContext'
 
 
 export const Task = ({task}) => {
-    const {removetask}=useContext(TasklistContext)
+    const {removetask,findid}=useContext(TasklistContext)
 
     return (
         <div>
@@ -13,7 +13,7 @@ export const Task = ({task}) => {
                     <button className="btn-delete task-btn" onClick={()=>removetask(task.id)}>
                       <i className="fas fa-trash-alt"></i>  
                     </button>
-                    <button className="btn-edit task-btn">
+                    <button className="btn-edit task-btn" onClick={()=>findid(task.id)}>
                       <i className="fas fa-pen"></i>  
                     </button>
                 </div>

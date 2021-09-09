@@ -5,11 +5,9 @@ export const TasklistContext=createContext()
 
 const TasklistContextProvider=(props)=>{
 
-    const [tasks,setTasks]=useState([
-        {id:1,task:'Read the book'},
-        {id:2,task:"wash the car"},
-        {id:3,task:"write some code"}
-    ])
+    const [tasks,setTasks]=useState([])
+
+    const [edititem,setedititem]=useState(null)
 
     //addtask
     const addtask=(title)=>{
@@ -24,8 +22,20 @@ const TasklistContextProvider=(props)=>{
         setTasks([])
     }
 
+    const findid=(id)=>{
+        const itemid=tasks.find(task=>task.id===id) 
+        
+        
+        setedititem(itemid)
+    }
+
+    const edittask=(title,id)=>{
+        const newtask=tasks.map(task=>task.id===id ?{title,id}:task)
+        setTasks(newtask)
+    }
+
     return(
-        <TasklistContext.Provider value={{tasks,addtask,removetask,clearlist}}>
+        <TasklistContext.Provider value={{tasks,addtask,removetask,clearlist,findid,edittask,edititem}}>
          {props.children}
         </TasklistContext.Provider>
     )
