@@ -14,7 +14,7 @@ function App() {
       <div className="app-wrapper">
         <Header />
         <div className="main">
-          <Taskform/>
+         <Taskform/>
         <Tasklist/>
         </div>
         
